@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CodeCheck AI — Multi-language software analysis and testing platform. Upload projects, detect errors, get AI-powered fixes.">
+    <title>CodeCheck AI | Smart Code Analysis Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">CodeCheck AI</span>
+                    <span class="logo-subtitle">Smart Analysis Platform</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Main</div>
+                <a class="nav-item active" data-view="dashboard">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></span>
+                    Dashboard
+                </a>
+                <a class="nav-item" data-view="upload">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></span>
+                    Upload Project
+                </a>
+                <div class="nav-section-label">Analysis</div>
+                <a class="nav-item" data-view="projects">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>
+                    Projects
+                    <span class="nav-badge info" id="navProjectCount" style="display:none">0</span>
+                </a>
+                <a class="nav-item" data-view="analysis">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+                    Analysis
+                </a>
+                <a class="nav-item" data-view="errors">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></span>
+                    Errors
+                    <span class="nav-badge" id="navErrorCount" style="display:none">0</span>
+                </a>
+                <a class="nav-item" data-view="tests">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
+                    Tests
+                </a>
+                <a class="nav-item" data-view="fixes">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
+                    Fixes
+                </a>
+                <div class="nav-section-label">Output</div>
+                <a class="nav-item" data-view="report">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></span>
+                    Report
+                </a>
+                <a class="nav-item" data-view="settings">
+                    <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span>
+                    Settings
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="version-info">CodeCheck AI v1.0</div>
+            </div>
+        </aside>
+
+        <!-- Sidebar overlay for mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <div>
+                        <div class="page-title" id="pageTitle">Dashboard</div>
+                        <div class="page-subtitle" id="pageSubtitle">Overview of all analysis activity</div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="header-action-btn btn-secondary" id="btnNewProject" onclick="app.navigate('upload')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        New Project
+                    </button>
+                </div>
+            </header>
+
+            <!-- Scrollable content area -->
+            <div class="main-scroll" id="mainScroll">
+
+                <!-- ===== DASHBOARD VIEW ===== -->
+                <section class="view active" id="viewDashboard">
+                    <div class="stats-grid" id="dashStatsGrid">
+                        <div class="stat-card"><div class="stat-icon icon-projects">📁</div><div class="stat-value" id="statProjects">0</div><div class="stat-label">Projects</div></div>
+                        <div class="stat-card"><div class="stat-icon icon-files">📄</div><div class="stat-value" id="statFiles">0</div><div class="stat-label">Files Analyzed</div></div>
+                        <div class="stat-card"><div class="stat-icon icon-languages">🌐</div><div class="stat-value" id="statLanguages">0</div><div class="stat-label">Languages</div></div>
+                        <div class="stat-card"><div class="stat-icon icon-errors">❌</div><div class="stat-value" id="statErrors">0</div><div class="stat-label">Errors</div></div>
+                        <div class="stat-card"><div class="stat-icon icon-warnings">⚠️</div><div class="stat-value" id="statWarnings">0</div><div class="stat-label">Warnings</div></div>
+                        <div class="stat-card"><div class="stat-icon icon-tests">✅</div><div class="stat-value" id="statTests">0</div><div class="stat-label">Tests Passed</div></div>
+                        <div class="stat-card"><div class="stat-icon icon-fixed">🔧</div><div class="stat-value" id="statFixed">0</div><div class="stat-label">Fixed</div></div>
+                        <div class="stat-card"><div class="stat-icon icon-health">💎</div><div class="stat-value" id="statHealth">—</div><div class="stat-label">Health</div></div>
+                    </div>
+
+                    <!-- Recent Analysis -->
+                    <div class="dash-section">
+                        <div class="dash-section-header">
+                            <h3>Recent Analysis</h3>
+                            <span class="view-all" onclick="app.navigate('projects')">View All →</span>
+                        </div>
+                        <div class="recent-list" id="recentAnalysisList">
+                            <div class="empty-state">
+                                <div class="empty-icon">📊</div>
+                                <div class="empty-title">No Analysis Yet</div>
+                                <div class="empty-desc">Upload a project to start analyzing code for errors and improvements.</div>
+                                <button class="header-action-btn btn-primary" onclick="app.navigate('upload')">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                    Upload Project
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== UPLOAD VIEW ===== -->
+                <section class="view" id="viewUpload">
+                    <div class="upload-container">
+                        <div class="upload-zone" id="uploadZone">
+                            <div class="upload-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            </div>
+                            <div class="upload-title">Drop your project here</div>
+                            <div class="upload-subtitle">Upload a ZIP archive or individual source files</div>
+                            <div class="upload-formats">
+                                <span class="format-chip">.zip</span>
+                                <span class="format-chip">.js</span>
+                                <span class="format-chip">.ts</span>
+                                <span class="format-chip">.py</span>
+                                <span class="format-chip">.java</span>
+                                <span class="format-chip">.c</span>
+                                <span class="format-chip">.cpp</span>
+                                <span class="format-chip">.cs</span>
+                                <span class="format-chip">.php</span>
+                                <span class="format-chip">.go</span>
+                                <span class="format-chip">.rs</span>
+                                <span class="format-chip">.kt</span>
+                                <span class="format-chip">.html</span>
+                                <span class="format-chip">.css</span>
+                                <span class="format-chip">.sql</span>
+                            </div>
+                            <input type="file" id="fileInput" multiple accept=".zip,.js,.jsx,.ts,.tsx,.py,.java,.c,.h,.cpp,.hpp,.cs,.php,.go,.rs,.kt,.kts,.html,.htm,.css,.scss,.sql,.json,.xml,.yaml,.yml,.toml,.md,.txt,.cfg,.ini,.env,.sh,.bat,.gradle,.sbt,.cmake,.makefile" />
+                        </div>
+                        <div class="upload-divider">OR</div>
+                        <div class="file-input-area">
+                            <label>Select individual files</label>
+                            <button class="header-action-btn btn-secondary" style="width:100%;justify-content:center" onclick="document.getElementById('fileInputMulti').click()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                Choose Files
+                            </button>
+                            <input type="file" id="fileInputMulti" multiple style="display:none" />
+                        </div>
+                        <div class="uploaded-files-list" id="uploadedFilesList"></div>
+                        <div id="analyzeButtonWrap" style="display:none;margin-top:20px;text-align:center">
+                            <button class="header-action-btn btn-primary" style="padding:12px 32px;font-size:15px" id="btnAnalyze" onclick="app.startAnalysis()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                Analyze Project
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== PROJECTS VIEW ===== -->
+                <section class="view" id="viewProjects">
+                    <div id="projectsList">
+                        <div class="empty-state">
+                            <div class="empty-icon">📁</div>
+                            <div class="empty-title">No Projects</div>
+                            <div class="empty-desc">Upload a project to see it listed here.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== ANALYSIS VIEW ===== -->
+                <section class="view" id="viewAnalysis">
+                    <div class="analysis-progress" id="analysisProgress">
+                        <div class="empty-state" id="analysisEmpty">
+                            <div class="empty-icon">🔍</div>
+                            <div class="empty-title">No Active Analysis</div>
+                            <div class="empty-desc">Upload a project and click "Analyze" to see the analysis workflow.</div>
+                        </div>
+                    </div>
+
+                    <!-- Project Overview Panel (shown after analysis) -->
+                    <div id="projectOverview" style="display:none">
+                        <h3 style="font-size:16px;font-weight:700;margin-bottom:16px">Project Overview</h3>
+                        <div class="project-info-grid" id="projectInfoGrid"></div>
+                        <h3 style="font-size:16px;font-weight:700;margin:24px 0 16px">File Structure</h3>
+                        <div class="file-tree" id="fileTree"></div>
+                    </div>
+                </section>
+
+                <!-- ===== ERRORS VIEW ===== -->
+                <section class="view" id="viewErrors">
+                    <!-- Severity filters -->
+                    <div class="error-filters" id="severityFilters">
+                        <button class="filter-btn active" data-filter="all">All <span class="filter-count" id="filterCountAll">0</span></button>
+                        <button class="filter-btn" data-filter="critical">Critical <span class="filter-count" id="filterCountCritical">0</span></button>
+                        <button class="filter-btn" data-filter="high">High <span class="filter-count" id="filterCountHigh">0</span></button>
+                        <button class="filter-btn" data-filter="medium">Medium <span class="filter-count" id="filterCountMedium">0</span></button>
+                        <button class="filter-btn" data-filter="low">Low <span class="filter-count" id="filterCountLow">0</span></button>
+                        <button class="filter-btn" data-filter="info">Info <span class="filter-count" id="filterCountInfo">0</span></button>
+                        <button class="filter-btn" data-filter="fixed">Fixed <span class="filter-count" id="filterCountFixed">0</span></button>
+                        <button class="filter-btn" data-filter="open">Open <span class="filter-count" id="filterCountOpen">0</span></button>
+                    </div>
+                    <!-- Search and filter -->
+                    <div class="error-filter-row">
+                        <div class="error-search-wrap">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" class="error-search" id="errorSearch" placeholder="Search errors..." />
+                        </div>
+                        <select class="filter-select" id="filterLanguage"><option value="all">All Languages</option></select>
+                        <select class="filter-select" id="filterType"><option value="all">All Types</option></select>
+                        <select class="filter-select" id="filterFile"><option value="all">All Files</option></select>
+                    </div>
+                    <div class="errors-list" id="errorsList">
+                        <div class="empty-state">
+                            <div class="empty-icon">✅</div>
+                            <div class="empty-title">No Errors Found</div>
+                            <div class="empty-desc">Analyze a project to see detected errors here.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== TESTS VIEW ===== -->
+                <section class="view" id="viewTests">
+                    <div class="test-summary-bar" id="testSummaryBar" style="display:none">
+                        <div class="test-stat total"><div class="ts-value" id="testTotal">0</div><div class="ts-label">Total</div></div>
+                        <div class="test-stat pass"><div class="ts-value" id="testPassed">0</div><div class="ts-label">Passed</div></div>
+                        <div class="test-stat fail"><div class="ts-value" id="testFailed">0</div><div class="ts-label">Failed</div></div>
+                        <div class="test-stat skip"><div class="ts-value" id="testSkipped">0</div><div class="ts-label">Skipped</div></div>
+                    </div>
+                    <div class="test-results-list" id="testResultsList">
+                        <div class="empty-state">
+                            <div class="empty-icon">🧪</div>
+                            <div class="empty-title">No Test Results</div>
+                            <div class="empty-desc">Analyze a project that contains automated tests to see results here.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== FIXES VIEW ===== -->
+                <section class="view" id="viewFixes">
+                    <div id="fixesList">
+                        <div class="empty-state">
+                            <div class="empty-icon">🔧</div>
+                            <div class="empty-title">No Fixes Available</div>
+                            <div class="empty-desc">Errors must be detected before fixes can be suggested.</div>
+                        </div>
+                    </div>
+                    <!-- Before/After comparison (shown after fix) -->
+                    <div id="beforeAfterSection" style="display:none">
+                        <h3 style="font-size:16px;font-weight:700;margin:24px 0 16px">Before & After Comparison</h3>
+                        <div class="before-after" id="beforeAfterGrid"></div>
+                    </div>
+                </section>
+
+                <!-- ===== REPORT VIEW ===== -->
+                <section class="view report-view" id="viewReport">
+                    <div class="report-container" id="reportContainer">
+                        <div class="empty-state">
+                            <div class="empty-icon">📋</div>
+                            <div class="empty-title">No Report Generated</div>
+                            <div class="empty-desc">Complete a project analysis to generate a full report.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== SETTINGS VIEW ===== -->
+                <section class="view" id="viewSettings">
+                    <div class="settings-group">
+                        <div class="sg-header">Analysis Settings</div>
+                        <div class="sg-body">
+                            <div class="setting-item">
+                                <div class="si-info">
+                                    <div class="si-label">Enable AI Analysis</div>
+                                    <div class="si-desc">Use AI-powered pattern matching for deeper code insights</div>
+                                </div>
+                                <div class="toggle-switch active" data-setting="aiAnalysis" onclick="app.toggleSetting(this)"></div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="si-info">
+                                    <div class="si-label">Auto-detect Language</div>
+                                    <div class="si-desc">Automatically detect project language from configuration files</div>
+                                </div>
+                                <div class="toggle-switch active" data-setting="autoDetect" onclick="app.toggleSetting(this)"></div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="si-info">
+                                    <div class="si-label">Show Info-level Issues</div>
+                                    <div class="si-desc">Include informational findings (style, naming conventions)</div>
+                                </div>
+                                <div class="toggle-switch active" data-setting="showInfo" onclick="app.toggleSetting(this)"></div>
+                            </div>
+                            <div class="setting-item">
+                                <div class="si-info">
+                                    <div class="si-label">Security Analysis</div>
+                                    <div class="si-desc">Check for common security vulnerabilities and patterns</div>
+                                </div>
+                                <div class="toggle-switch active" data-setting="securityAnalysis" onclick="app.toggleSetting(this)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-group">
+                        <div class="sg-header">Supported Languages</div>
+                        <div class="sg-body" id="languageSettings">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /main-scroll -->
+        </div><!-- /main-content -->
+    </div><!-- /app-layout -->
+
+    <!-- ===== MODAL: Fix Confirmation ===== -->
+    <div class="modal-overlay" id="fixModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title" id="fixModalTitle">Apply Fix</span>
+                <button class="modal-close" onclick="app.closeFixModal()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body" id="fixModalBody">
+                <!-- Populated dynamically -->
+            </div>
+            <div class="modal-footer">
+                <button class="header-action-btn btn-secondary" onclick="app.closeFixModal()">Cancel</button>
+                <button class="header-action-btn btn-primary" id="btnApplyFix" onclick="app.confirmApplyFix()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Apply Fix
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL: Code Viewer ===== -->
+    <div class="modal-overlay" id="codeViewerModal">
+        <div class="modal" style="max-width:900px">
+            <div class="modal-header">
+                <span class="modal-title" id="codeViewerTitle">Code Viewer</span>
+                <button class="modal-close" onclick="app.closeCodeViewer()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body" id="codeViewerBody" style="padding:0">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ===== CDN Dependencies ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/acorn/8.11.2/acorn.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
