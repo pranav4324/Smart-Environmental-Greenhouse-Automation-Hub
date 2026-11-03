@@ -1,2 +1,126 @@
-# Smart-Environmental-Greenhouse-Automation-Hub
-Smart Greenhouse IoT System: Short Project DescriptionThe Autonomous IoT Smart Greenhouse System is an advanced, fault-tolerant agricultural automation platform built around the ESP32-D0WD-V3 microcontroller. It provides real-time environmental monitoring, intelligent closed-loop automation, and dual-mode control  
+# Smart Environmental & Greenhouse Automation Hub
+
+> IoT Automation Platform • React Web Dashboard • Node.js REST API • Simulation & Hardware Mode
+
+---
+
+## 🌿 Overview
+
+The **Smart Environmental & Greenhouse Automation Hub** is an end-to-end IoT platform for precision agriculture and automated environmental control. It runs an automated rule engine to trigger actuator relays, visualizes real-time and historical telemetry on a modern web dashboard, and provides a context-aware AI diagnostic assistant.
+
+---
+
+## ✨ Features
+
+- **3D Greenhouse Digital Twin**: Interactive WebGL 3D model with real-time physical simulation of ventilation louvers, cooling exhaust fan, drip irrigation misting, and LED grow light arrays.
+- **Dual Operating Modes**: Simulation (hardware-free) and Physical Hardware (ESP32 via MQTT/HTTP).
+- **8 Sensor Measurements**: Temperature, Humidity, Soil Moisture, Light, CO₂, Air Quality, Rain, and Motion.
+- **Actuator & Relay Control**: Water Pump, Cooling Fan, LED Grow Lights, Ventilation Louvers, Security Buzzer.
+- **Greenhouse AI Assistant**: Context-aware diagnostics powered by Local Qwen 4B LLM (`start.bat` / llamafile), Google Gemini API, and offline heuristic fallback engine.
+- **Floating 3D AI Chatbot**: Always-available agritech assistant with 1-click issue resolution.
+- **Real-time Telemetry Charts**: Historical trend analysis with recharts.
+- **Automation Rules Engine**: Configurable sensor threshold triggers for automated actuator control.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Lucide React, Recharts.
+- **Backend**: Node.js, Express, TypeScript.
+- **Cloud/Database**: Firebase Admin SDK with local in-memory store fallback.
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Prerequisites
+- Node.js (v18 or higher)
+- npm
+
+### 2. Installation
+
+Open PowerShell and navigate to the project folder:
+```powershell
+cd "d:\Smart greenHouse system"
+npm install
+```
+
+### 3. Run the Application
+
+#### Option A: One-Click Launcher (Recommended)
+Double-click `start-all.bat` in the project root. It will automatically start:
+1. **Local AI Agent**: `llamafile` running Qwen 4B thinking model on `http://127.0.0.1:8080`
+2. **Backend Server**: Node.js Express API on `http://localhost:5000`
+3. **3D Web Dashboard**: Vite React app on `http://localhost:3000`
+
+#### Option B: Individual Terminals
+
+**Terminal 1 – Local AI Model Agent (Port 8080):**
+```powershell
+cd "d:\Smart greenHouse system"
+.\start.bat
+```
+
+**Terminal 2 – Backend API Server (Port 5000):**
+```powershell
+cd "d:\Smart greenHouse system"
+npm run server
+```
+
+**Terminal 3 – Web Dashboard (Port 3000):**
+```powershell
+cd "d:\Smart greenHouse system"
+npm run dev
+```
+
+Then open your browser at: **http://localhost:3000**
+
+### 4. Verify & Test
+```bash
+# TypeScript type check
+npm run typecheck
+
+# Run all unit tests (29 tests)
+npm run test
+```
+
+---
+
+## 📂 Project Structure
+
+```
+Smat Home/
+├── src/
+│   ├── components/
+│   │   ├── ai/           # AI Assistant Chat component
+│   │   ├── dashboard/    # Sensor cards, charts, device panel
+│   │   └── layout/       # Navbar, Sidebar, Footer
+│   ├── pages/            # Dashboard, Sensors, Automation, Devices, Alerts, Analytics, AI, Settings
+│   ├── services/         # API service layer
+│   ├── types/            # TypeScript type definitions
+│   └── utils/            # Constants and formatters
+├── server/
+│   ├── index.ts          # Express REST API server
+│   ├── ai.ts             # AI diagnostic heuristic engine
+│   ├── automation.ts     # Rule engine for actuator control
+│   ├── simulation.ts     # Simulation scenario service
+│   └── firebase.ts       # Firebase / in-memory data store
+├── tests/                # Vitest unit test suite (29 tests)
+├── package.json
+└── vite.config.ts
+```
+
+---
+
+## 🌐 Navigation Pages
+
+| Page | Description |
+| --- | --- |
+| **Dashboard** | Live sensor overview, device controls, and alerts |
+| **Sensors** | Individual sensor readings and threshold status |
+| **Automation Rules** | Configure rule thresholds and toggle automation |
+| **Device Controls** | Manual actuator relay on/off control |
+| **Alerts Log** | View and acknowledge system alert history |
+| **Analytics & Trends** | Historical telemetry trend charts |
+| **AI Assistant** | Ask natural language questions about greenhouse status |
+| **Settings** | MQTT broker and Firebase configuration |
